@@ -2,6 +2,7 @@
  * @param {import('express').Request} req
  * @param {import('express').Response} res
 */
+import { response } from "express";
 import { createAccessToken } from "../libs/jwt.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
@@ -64,11 +65,10 @@ export const register = async (req, res) => {
     
 }
 
-
-
 export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
+
         const userFound = await User.findOne({email});
 
         if(!userFound)
@@ -85,8 +85,43 @@ export const login = async (req, res) => {
             });
         }
 
+        const token = await createAccessToken({
+            id: userFound._id,
+            username: userFound.username,
+        });
+
+        res.cookie("token", token, {
+
+        });
+
+        res.json({
+            msg: "El usuario fue logeado correctamente.",
+            id: userFound._id,
+            username: userFound.username,
+            email: userFound.email,
+        });
+
     } catch (error) {
-        
+        return res.status(500).json({message: error.message});
     }
 }
     
+export const logout = async (req, res = response) => {
+    res.cookie("token", "", {
+        httpOnly: true,
+        secure: true,
+        expires: new Date(0)
+    });
+    return res.sendStatus(200);
+}
+
+export const profile = async (req, res) => {
+    const userFound = await User.findById(req.user.id);
+    if(!userFound) return res.status(400).json({message: "Usuario no encontrado."});
+
+    return res.json({
+        id: userFound._id,
+        username: userFound.username,
+        email: userFound.email
+    });
+}
