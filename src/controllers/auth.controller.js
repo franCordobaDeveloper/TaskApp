@@ -19,14 +19,19 @@ export const register = async (req, res) => {
             return res.status(400).json({ msg: "Todos los campos son obligatorios." });
         }
 
-        const userFound = await User.findOne({email});
-
-        if(userFound)
+        const userFoundWithEmail = await User.findOne({email});
+        const userFoundWithUserName = await User.findOne({username});
+        
+        if(userFoundWithEmail)
         {
-            return res.status(400).json({
-                msg: ["El email ya esta en uso por favor ingresar otro."],
-            });
+            return res.status(400).json(["El email ya existe"]);
         }
+
+         if(userFoundWithUserName)
+        {
+            return res.status(400).json(["El nombre de usuario ya existe"]);
+        }
+
 
         const passwordHash = bcrypt.hashSync(password, 10);
 

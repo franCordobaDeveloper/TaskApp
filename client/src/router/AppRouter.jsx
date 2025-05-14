@@ -13,7 +13,7 @@ export const AppRouter = () => {
                 <Route path="register" element={<RegisterPage />}/>
 
                 {/* Rutas para las tareas */}
-                <Route path="/tasks-list" element />
+                <Route path="/tasks-list" element={<h1> task list </h1>}/>
                 <Route path="/add-tasks" element />
                 <Route path="/tasks/:id" element />
                 <Route path="/profile" element />
