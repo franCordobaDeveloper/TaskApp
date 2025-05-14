@@ -113,6 +113,7 @@ export const RegisterPage = () => {
                     minLength: { value: 6, message: "Mínimo 6 caracteres" },
                   })}
                   type="password"
+                  name="password"
                   placeholder="Contraseña"
                   id="password"
                   className="block w-full rounded-md border bg-white px-3 py-1.5 text-base text-gray-900 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
