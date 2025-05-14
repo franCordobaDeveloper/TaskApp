@@ -1,14 +1,13 @@
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 export const RegisterPage = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Aquí podrías hacer lógica de validación o llamada a API con Zod + fetch o axios
-
-    // Una vez registrado con éxito, redirigís al login
+  const onSubmit = (data) => {
+    console.log("Datos enviados:", data);
+    
     navigate("/login");
   };
 
@@ -27,7 +26,7 @@ export const RegisterPage = () => {
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <div className="border border-gray-300 shadow-md rounded-xl p-8 bg-white">
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
             {/* Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-900">
@@ -35,10 +34,13 @@ export const RegisterPage = () => {
               </label>
               <div className="mt-2">
                 <input
+                  {...register("email", { required: "El email es obligatorio" })}
                   type="email"
+                  placeholder="email@gmail.com"
                   id="email"
                   className="block w-full rounded-md border bg-white px-3 py-1.5 text-base text-gray-900 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
                 />
+                {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
               </div>
             </div>
 
@@ -49,11 +51,16 @@ export const RegisterPage = () => {
               </label>
               <div className="mt-2">
                 <input
+                  {...register("username", {
+                    required: "El nombre de usuario es obligatorio",
+                    minLength: { value: 3, message: "Mínimo 3 caracteres" }
+                  })}
                   type="text"
+                  placeholder="Nombre de usuario"
                   id="username"
-                  name="username"
                   className="block w-full rounded-md border bg-white px-3 py-1.5 text-base text-gray-900 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
                 />
+                {errors.username && <p className="text-red-500 text-sm">{errors.username.message}</p>}
               </div>
             </div>
 
@@ -64,11 +71,16 @@ export const RegisterPage = () => {
               </label>
               <div className="mt-2">
                 <input
+                  {...register("password", {
+                    required: "La contraseña es obligatoria",
+                    minLength: { value: 6, message: "Mínimo 6 caracteres" }
+                  })}
                   type="password"
-                  name="password"
+                  placeholder="Contraseña"
                   id="password"
                   className="block w-full rounded-md border bg-white px-3 py-1.5 text-base text-gray-900 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
                 />
+                {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
               </div>
             </div>
 
