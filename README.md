@@ -21,10 +21,17 @@ Aplicación para gestionar tareas con backend en Node.js y frontend en React.
 1. Clonar el repositorio y entrar en la carpeta backend:
 
 ```bash
-git clone https://tu-repositorio.git
-cd TaskApp/backend
+git clone https://github.com/franCordobaDeveloper/TaskApp.git
+cd TaskApp/
 
 ### clonar dependencias
+
+npm install
+# o
+yarn install
+
+### Front End
+cd client
 
 npm install
 # o
