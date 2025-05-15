@@ -9,7 +9,12 @@ import taksRoutes from "./routes/tasks.routes.js";
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    credentials: true,
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.use(morgan('dev'));
 app.use(express.json());

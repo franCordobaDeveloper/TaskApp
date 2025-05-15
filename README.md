@@ -1,2 +1,31 @@
+
 # TaskApp
-Challenge ingreso a Academia ForIt 2025
+
+Proyecto desarrollado para el challenge de ingreso a Academia ForIt 2025.  
+Aplicación para gestionar tareas con backend en Node.js y frontend en React.
+
+---
+
+## Requisitos previos
+
+- Node.js (versión 16 o superior recomendada)  
+- npm o yarn  
+- Git
+
+---
+
+## Instalación
+
+### Backend
+
+1. Clonar el repositorio y entrar en la carpeta backend:
+
+```bash
+git clone https://tu-repositorio.git
+cd TaskApp/backend
+
+### clonar dependencias
+
+npm install
+# o
+yarn install
