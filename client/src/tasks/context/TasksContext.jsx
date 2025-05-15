@@ -29,13 +29,22 @@ export function TaskProvider({ children }) {
   };
 
   const createTask = async (task) => {
+  try {
+    const res = await createTaskRequest(task);
+    setTasks(prevTasks => [...prevTasks, res.data]);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+  const updateTask = async (id, task) => {
     try {
-      const res = await createTaskRequest(task);
-      console.log(res.data);
+      const res = await updateTaskRequest(id, task);
+      setTasks(prevTasks => prevTasks.map(t => (t._id === id ? res.data : t)));
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
-  };
+};
 
   const getTask = async (id) => {
     try {
@@ -45,15 +54,6 @@ export function TaskProvider({ children }) {
       console.error(error);
     }
   };
-
-  const updateTask = async (id, task) => {
-    try {
-      await updateTaskRequest(id, task);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
     <TaskContext.Provider
       value={{

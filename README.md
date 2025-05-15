@@ -29,3 +29,7 @@ cd TaskApp/backend
 npm install
 # o
 yarn install
+
+![Formulario de registro de la App](./gitImage/formulario%20enviando%20la%20data%20.png)
+
+![Crud de la Task App](./gitImage/Captura%20de%20pantalla%202025-05-15%20202033.png)
