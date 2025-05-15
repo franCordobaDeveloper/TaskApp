@@ -36,3 +36,11 @@ cd client
 npm install
 # o
 yarn install
+
+
+Uso
+Levantar primero el backend, luego el frontend.
+
+Registrar usuario o iniciar sesión.
+
+Crear, editar y eliminar tareas.
